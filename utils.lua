@@ -3,6 +3,23 @@
 PI = math.pi
 TAU = PI * 2
 
+function rand(n,x)
+    return math.random() * (x-n) + n
+end
+function irand(n,x)
+    -- no math.round or round, so... reinventing the wheel again!
+    v = rand(n,x)
+    if v % 1 <= 0.5 then
+        v = math.floor(v)
+    else
+        v = math.ceil(v)
+    end
+    
+    return v
+end
+function choose(a)
+    return a[irand(1,#a)]
+end
 function humanize_bytes(bytes, si, digits)
     if type(si) ~= "boolean" then si = false end
     if type(digits) ~= "number" then digits = 1 end

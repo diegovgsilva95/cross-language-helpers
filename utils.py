@@ -1,9 +1,19 @@
 import math
 import re
 import sys
+import random
 
 PI = math.pi
 TAU = PI * 2
+
+def rand(n,x):
+    return random.random() * (x - n) + n
+
+def irand(n,x):
+    return round(rand(n,x))
+
+def choose(a):
+    return random.choice(a)
 
 def clear():
     sys.stdout.write("\x1b[H\x1b[2J\x1b[3J")

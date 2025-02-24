@@ -22,16 +22,19 @@ I guess the current names hint at what each function does, but there's a brief l
 - `weightedRandomChoose`: similar to `choose` but the input list has actually key-value pairs where the value is the key's weight (the bigger the value, the more the probability of choosing it)
 - `pi`: Well, it's the π. The math π. No introduction needed, I guess.
 - `tau`: It's double the π. It exists because things like `sin(2 * PI * frequency / N)` could be simply expressed as `sin(TAU * frequency / N)` (see? no need to multiply twice)
-- `boolint` (Ruby only): JS, Python and even Lua allows for booleans to be casted to integers. Ruby doesn't. This function allows it for Ruby, (ab)using the fact that "true" has 4 characters and "false" has 5 (so 5-"false".size is 0, 5-"true".size is 1). The double-negation ensures a boolean.
+- `boolint` (Ruby only): JS, Python ~~and even Lua~~ (edit: Lua doesn't) allow for booleans to be casted to integers. Ruby doesn't. This function allows it for Ruby, (ab)using the fact that "true" has 4 characters and "false" has 5 (so `5-"false".size` is 0, `5-"true".size` is 1). The double-negation ensures a boolean.
 
 ## tests/
 A folder for shell-script meta-utilities (i.e., to test current cross-language helper implementations). They need to be ran at the project's root (in other words, **don't** `cd tests/` to run them).
 
-## tests/list-utils.sh
+### tests/list-utils.sh
 It hard-codedly iterates through currently-implemented helper files (utils.mjs, utils.py, utils.rb and utils.lua) and lists what they're currently exporting.
 
-## tests/test-de-humanize-bytes.sh
+### tests/test-de-humanize-bytes.sh
 A test tailored for `humanizeBytes` and `dehumanizeBytes`. It generates random numbers (using Node.js, storing it to a shellscript variable), feeds them to each `humanizeBytes` implementation, compares their output (also using Node.js), then proceeds to test each implementation of `dehumanizeBytes` (using Node.js's output as a basis) and compare their output (you guessed it: using Node.js). 
+
+### tests/test-randomness.sh
+A test tailored for `rand`, `irand` and `choose`. First, for each language/interpreter, generates both float and integer random numbers (reusing the same array by placing irand at even positions and rand at odd positions) within a given range, then compute their boundaries (min and max). Then, for each language/interpreter chooses multiple times among pre-defined items, then proceeds to determine their unique elements (it should reflect the original choices).
 
 ## Scripting languages (current and planned)
 - [x] Javascript (Node.js)
